@@ -27,7 +27,7 @@ class CmfObjectInfoExtensionTest extends AbstractExtensionTestCase
             array(
                 array(
                     'providers' => array('foo', 'bar'),
-                    'expression' => array(
+                    'expressions' => array(
                         'Foo\Bar\Foo' => array(
                             'label' => 'object.title',
                             'help' => 'This is some help',
@@ -47,12 +47,12 @@ class CmfObjectInfoExtensionTest extends AbstractExtensionTestCase
      */
     public function testExtension($config)
     {
+        $this->load($config);
+
         $config = array_merge(array(
             'providers' => array(),
             'expression' => array(),
         ), $config);
-
-        $this->load($config);
 
         $driverDef = $this->container->getDefinition('cmf_object_info.metadata.driver.di_extension');
         $driverConfig = $driverDef->getArgument(0);

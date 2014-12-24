@@ -33,9 +33,6 @@ class CmfObjectInfoExtension extends Extension
         $loader->load('object-info.xml');
 
         $config = $processor->processConfiguration($configuration, $configs);
-
-        $driverDef = $container->getDefinition('cmf_object_info.metadata.driver.di_extension');
-        $driverDef->replaceArgument(0, $config['expression']);
     }
 
     public function getNamespace()

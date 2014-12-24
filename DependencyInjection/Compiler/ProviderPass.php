@@ -31,7 +31,10 @@ class ProviderPass implements CompilerPassInterface
             'cmf_object_info.manager'
         );
 
+        $wantedProviders = $container->getParameter('cmf_object_info.providers');
+
         $ids = $container->findTaggedServiceIds('cmf_object_info.provider');
+        $providers = array();
 
         foreach ($ids as $id => $attributes) {
             if (!isset($attributes[0]['alias'])) {
@@ -41,9 +44,30 @@ class ProviderPass implements CompilerPassInterface
                 ));
             }
 
+            $alias = $attributes[0]['alias'];
+
+            if (isset($providers[$alias])) {
+                throw new \InvalidArgumentException(sprintf(
+                    'A provider has already been registered with alias "%s". It has the ID "%s"',
+                    $alias, $id
+                ));
+            }
+
+            $providers[$alias] = $id;
+        }
+
+        foreach ($wantedProviders as $wantedProvider) {
+
+            if (!isset($providers[$wantedProvider])) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Provider "%s" has not been registered. Available providers are: "%s"',
+                    $wantedProvider, implode('", "', $wantedProviders)
+                ));
+            }
+
             $repositoryFactory->addMethodCall(
                 'addProvider',
-                array($attributes[0]['alias'], new Reference($id))
+                array(new Reference($id))
             );
         }
     }

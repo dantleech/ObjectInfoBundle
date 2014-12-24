@@ -14,7 +14,7 @@ example:
 $object = new Product();
 // ...
 
-$objectInfoManager->getInfo($object);
+$objectInfoManager->provideInfo($object);
 
 echo $info['route']['edit']; // http://path/to/edit?id=123
 echo $info['title']; // "My product title"
