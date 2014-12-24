@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_objectMeta.finder.selector.parser.class">Symfony\Cmf\Component\ObjectInfo\Finder\SelectorParser</parameter>
+        <parameter key="cmf_objectMeta.factory.container.class">Symfony\Cmf\Component\ObjectInfo\Factory\ContainerRepositoryFactory</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="cmf_object_info.metadata_factory" class="Metadata\MetadataFactory">
+            <argument type="service" id="cmf_object_info.metadata.driver" />
+        </service>
+
+        <service id="cmf_object_info.metadata.driver.di_extension" class="Symfony\Cmf\Bundle\ObjectInfoBundle\ObjectInfo\Metadata\ExtensionConfigDriver">
+            <argument type="collection"></argument>
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,6 @@
+cmf_object_info:
+    providers: ['one', 'two', 'three']
+    expressions:
+        Foo\Bar\Baz:
+            label: "label"
+            route: "route"

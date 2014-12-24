@@ -1,0 +1,36 @@
+{
+    "Mame": "symfony-cmf/object-meta-bundle",
+    "description": "Allows the mapping and retrieval of arbitraey metadata to object classes",
+    "homepage": "http://cmf.symfony.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Symfony CMF Community",
+            "homepage": "https://github.com/symfony-cmf/symfony-cmf/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/expression-language": "~2.3",
+        "jms/metadata": "~1.5"
+    },
+    "require-dev": {
+        "symfony-cmf/testing": "~1.1",
+        "matthiasnoback/symfony-dependency-injection-test": "0.*",
+        "matthiasnoback/symfony-config-test": "0.*"
+    },
+    "suggest": {
+        "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents",
+        "doctrine/phpcr-bundle": "To enable support for the PHPCR ODM documents"
+    },
+    "autoload": {
+        "psr-4": {
+            "Symfony\\Cmf\\Bundle\\ObjectInfoBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
