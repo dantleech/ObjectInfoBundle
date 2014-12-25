@@ -51,12 +51,12 @@ class CmfObjectInfoExtensionTest extends AbstractExtensionTestCase
 
         $config = array_merge(array(
             'providers' => array(),
-            'expression' => array(),
+            'expressions' => array(),
         ), $config);
 
-        $driverDef = $this->container->getDefinition('cmf_object_info.metadata.driver.di_extension');
-        $driverConfig = $driverDef->getArgument(0);
+        $driverDef = $this->container->getDefinition('cmf_object_info.provider.expression');
+        $driverConfig = $driverDef->getArgument(1);
 
-        $this->assertSame($config['expression'], $driverConfig);
+        $this->assertSame($config['expressions'], $driverConfig);
     }
 }

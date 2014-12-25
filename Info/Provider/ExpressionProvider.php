@@ -24,38 +24,43 @@ class ExpressionProvider implements InfoProviderInterface
     {
         $className = get_class($object);
 
-        $mapping = $this->getClassMapping($className);
+        $mappings = $this->getClassMappings($className);
 
-        return $this->mapInfo($object, $mapping);
+        return $this->mapInfo($object, $mappings);
     }
 
-    private function mapInfo($object, $mapping)
+    private function mapInfo($object, $mappings)
     {
         $info = new Info();
 
-        foreach ($mapping as $key => $expression) {
-            $value = $this->expressionLanguage->evaluate($expression, array(
-                'object' => $object
-            ));
+        foreach ($mappings as $mapping) {
+            foreach ($mapping as $key => $expression) {
+                $value = $this->expressionLanguage->evaluate($expression, array(
+                    'object' => $object
+                ));
 
-            $info->set($key, $value);
+                $info->offsetSet($key, $value);
+            }
         }
 
         return $info;
     }
 
-    private function getClassMapping($className)
+    private function getClassMappings($className)
     {
-        if (isset($this->mapping[$className])) {
-            return $this->mapping[$className];
+        $mappings = array();
+
+        $classHierarchy = array_reverse(class_parents($className));
+        $classHierarchy += array($className);
+
+        foreach ($classHierarchy as $class) {
+            if (isset($this->mapping[$class])) {
+                $mappings[] = $this->mapping[$class];
+            }
         }
 
-        $classParents = array_reverse(class_parents($className));
-
-        foreach ($classParents as $classParent) {
-            if (isset($this->mapping[$classParent])) {
-                return $classParent;
-            }
+        if ($mappings) {
+            return $mappings;
         }
 
         throw new \InvalidArgumentException(sprintf(

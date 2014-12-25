@@ -13,6 +13,7 @@ namespace Symfony\Cmf\Bundle\ObjectInfoBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>
@@ -22,13 +23,13 @@ class ProviderPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition(
-            'cmf_object_info.manager'
+            'cmf_object_info.provider.aggregate'
         )) {
             return;
         }
 
-        $managerDef = $container->getDefinition(
-            'cmf_object_info.manager'
+        $aggregateProviderDef = $container->getDefinition(
+            'cmf_object_info.provider.aggregate'
         );
 
         $wantedProviders = $container->getParameter('cmf_object_info.providers');
@@ -56,19 +57,22 @@ class ProviderPass implements CompilerPassInterface
             $providers[$alias] = $id;
         }
 
+        $resolvedProviders = array();
         foreach ($wantedProviders as $wantedProvider) {
 
             if (!isset($providers[$wantedProvider])) {
                 throw new \InvalidArgumentException(sprintf(
                     'Provider "%s" has not been registered. Available providers are: "%s"',
-                    $wantedProvider, implode('", "', $wantedProviders)
+                    $wantedProvider, implode('", "', $providers)
                 ));
             }
 
-            $repositoryFactory->addMethodCall(
-                'addProvider',
-                array(new Reference($id))
-            );
+            $resolvedProviders[] = new Reference($providers[$wantedProvider]);
         }
+
+            $aggregateProviderDef->replaceArgument(
+                0,
+                $resolvedProviders
+            );
     }
 }

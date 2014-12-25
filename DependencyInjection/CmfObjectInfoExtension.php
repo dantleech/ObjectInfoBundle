@@ -33,6 +33,11 @@ class CmfObjectInfoExtension extends Extension
         $loader->load('object-info.xml');
 
         $config = $processor->processConfiguration($configuration, $configs);
+
+        $container->setAlias('cmf_object_info.provider', 'cmf_object_info.provider.aggregate');
+        $providerDef = $container->getDefinition('cmf_object_info.provider.expression');
+        $providerDef->replaceArgument(1, $config['expressions']);
+        $container->setParameter('cmf_object_info.providers', $config['providers']);
     }
 
     public function getNamespace()

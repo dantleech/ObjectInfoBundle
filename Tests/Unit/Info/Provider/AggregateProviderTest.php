@@ -30,7 +30,7 @@ class AggregateProviderTest extends ProphecyTestCase
             $this->provider1->reveal()
         ));
 
-        $this->info->all()->willReturn(array());
+        $this->info->toArray()->willReturn(array());
         $this->provider1->provideInfoFor($this->object)->willReturn($this->info->reveal());
 
         $info = $aggregateProvider->provideInfoFor($this->object);

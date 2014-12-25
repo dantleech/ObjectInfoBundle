@@ -3,7 +3,7 @@
 <!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
     colors="true"
-    bootstrap="vendor/autoload.php"
+    bootstrap="vendor/symfony-cmf/testing/bootstrap/bootstrap.php"
     >
 
     <testsuites>
@@ -25,7 +25,7 @@
     </filter>
 
     <php>
-        <server name="KERNEL_DIR" value="Tests/ObjectInfos/app" />
+        <server name="KERNEL_DIR" value="Tests/Resources/app" />
     </php>
 
 </phpunit>

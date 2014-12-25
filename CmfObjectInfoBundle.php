@@ -13,15 +13,13 @@ namespace Symfony\Cmf\Bundle\ObjectInfoBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Cmf\Bundle\ObjectInfoBundle\DependencyInjection\Compiler\FactoryPass;
-use Symfony\Cmf\Bundle\ObjectInfoBundle\DependencyInjection\Compiler\CompositeRepositoryPass;
+use Symfony\Cmf\Bundle\ObjectInfoBundle\DependencyInjection\Compiler\ProviderPass;
 
 class CmfObjectInfoBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new FactoryPass());
-        $container->addCompilerPass(new CompositeRepositoryPass());
+        $container->addCompilerPass(new ProviderPass());
         parent::build($container);
     }
 

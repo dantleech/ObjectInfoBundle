@@ -1,0 +1,11 @@
+cmf_object_info:
+    providers: [ expression ]
+    expressions:
+        Symfony\Cmf\Bundle\ObjectInfoBundle\Tests\Resources\TestBundle\Document\AbstractArticle:
+            label: "object.getTitle()"
+            icon_16: "'bundles/foobar.png'"
+            edit_route: "['bar_edit', { 'id': object.getId() }]"
+            view_route: "['bar_view', { 'id': object.getId() }]"
+
+        Symfony\Cmf\Bundle\ObjectInfoBundle\Tests\Resources\TestBundle\Document\Article:
+            label: "'Concrete Article'"

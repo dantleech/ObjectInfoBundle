@@ -10,27 +10,33 @@ class Info extends \ArrayObject
 
     public function merge(Info $info)
     {
-        foreach ($info->all() as $key => $value) {
-            $this->set($key, $value);
+        foreach ($info->toArray() as $key => $value) {
+            $this->data[$key] = $value;
         }
     }
 
-    public function all()
+    public function toArray()
     {
         return $this->data;
     }
 
-    public function get($key)
+    public function offsetSet($key, $value)
+    {
+        $this->data[$key] = $value;
+    }
+
+    public function offsetGet($key)
     {
         if (!isset($this->data[$key])) {
             return null;
         }
 
-        return $this->data[$key];
-    }
+        $data = $this->data[$key];
 
-    public function set($key, $value)
-    {
-        $this->data[$key] = $value;
+        if (is_array($data)) {
+            return new self($data);
+        }
+
+        return $data;
     }
 }

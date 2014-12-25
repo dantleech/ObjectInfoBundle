@@ -1,9 +1,0 @@
-cmf_object_metadata:
-    providers: [ expression, sonata ]
-    expression:
-        Foo\Bar\Bundle\Bar:
-            label: "object.title"
-            icon_16: "'bundles/foobar.png'"
-            urls:
-                edit: "[bar_edit, { 'id': object.id }]"
-                view: "[bar_view, { 'id': object.id }]"

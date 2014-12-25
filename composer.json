@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "symfony/expression-language": "~2.3",
-        "jms/metadata": "~1.5"
+        "twig/twig": "1.*"
     },
     "require-dev": {
         "symfony-cmf/testing": "~1.1",

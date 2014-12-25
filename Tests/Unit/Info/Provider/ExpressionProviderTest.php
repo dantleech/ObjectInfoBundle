@@ -36,7 +36,7 @@ class ExpressionProviderTest extends ProphecyTestCase
 
         $this->assertInstanceOf('Symfony\Cmf\Bundle\ObjectInfoBundle\Info\Info', $info);
 
-        $this->assertEquals('foo', $info->get('icon'));
-        $this->assertEquals('bar', $info->get('route'));
+        $this->assertEquals('foo', $info['icon']);
+        $this->assertEquals('bar', $info['route']);
     }
 }

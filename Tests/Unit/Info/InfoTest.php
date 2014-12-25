@@ -17,13 +17,13 @@ class InfoManagerTest extends ProphecyTestCase
 
     public function testGetSet()
     {
-        $this->info->set('foo', 'bar');
-        $this->assertEquals('bar', $this->info->get('foo'));
+        $this->info['foo'] = 'bar';
+        $this->assertEquals('bar', $this->info['foo']);
     }
 
     public function testGetNonExisting()
     {
-        $res = $this->info->get('non-existing');
+        $res = $this->info['non-existing'];
         $this->assertNull($res);
     }
 }

@@ -10,12 +10,17 @@
 
     <services>
 
-        <service id="cmf_object_info.metadata_factory" class="Metadata\MetadataFactory">
-            <argument type="service" id="cmf_object_info.metadata.driver" />
+        <service id="cmf_object_info.provider.aggregate" class="Symfony\Cmf\Bundle\ObjectInfoBundle\Info\Provider\AggregateProvider">
+            <argument type="collection" />
         </service>
 
-        <service id="cmf_object_info.metadata.driver.di_extension" class="Symfony\Cmf\Bundle\ObjectInfoBundle\ObjectInfo\Metadata\ExtensionConfigDriver">
-            <argument type="collection"></argument>
+        <service id="cmf_object_info.expression_language" class="Symfony\Component\ExpressionLanguage\ExpressionLanguage">
+        </service>
+
+        <service id="cmf_object_info.provider.expression" class="Symfony\Cmf\Bundle\ObjectInfoBundle\Info\Provider\ExpressionProvider">
+            <argument type="service" id="cmf_object_info.expression_language" />
+            <argument type="collection" />
+            <tag name="cmf_object_info.provider" alias="expression"/>
         </service>
 
     </services>
