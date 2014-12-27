@@ -1,5 +1,5 @@
 {
-    "Mame": "symfony-cmf/object-meta-bundle",
+    "name": "symfony-cmf/object-info-bundle",
     "description": "Allows the mapping and retrieval of arbitraey metadata to object classes",
     "homepage": "http://cmf.symfony.com",
     "license": "MIT",
